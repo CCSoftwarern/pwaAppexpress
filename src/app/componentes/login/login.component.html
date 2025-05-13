@@ -1,0 +1,55 @@
+<div class="d-flex flex-column justify-content-between bg-light" style="min-height: 100vh;">
+  <div class="container p-4" style="width: 100%; max-width: 400px; border-radius: 20px;">
+    <!-- Logo no topo -->
+    <div class="text-center mb-4">
+      <img src="https://logospng.org/download/will-bank/will-bank-4096.png" alt="Logo"
+        style="max-width: 150px; height: auto;">
+    </div>
+
+
+
+    <div class="form-group mb-3">
+      <input [(ngModel)]="email" type="email" class="form-control rounded-pill" placeholder="Email">
+    </div>
+
+    <div class="form-group mt-4">
+      <input [(ngModel)]="password" type="password" class="form-control rounded-pill" placeholder="Password">
+    </div>
+
+    <div class="text-end mt-2">
+      <a href="#" class="text-decoration-none text-muted">Esqueci a senha</a>
+      <p>{{senhaCriada}}</p>
+    </div>
+
+    <button (click)="loginMotoboy()" class="btn w-100 rounded-pill mb-2 mt-4"
+      style="background-color: #ff784b; color: white;" [disabled]="isLoading">
+      @if(!isLoading) {
+      <span>Login</span>
+      }@else {
+      <div class="spinner-border spinner-border-sm text-light" role="status"></div>
+      <span> Entrando...</span>
+      }
+    </button>
+
+    <div class="text-center mb-4 mt-4">
+      @if (showAlert) {
+      <div class="alert alert-{{alertType}} alert-dismissible fade show" role="alert">
+        {{ alertMessage }}
+        <button type="button" class="btn-close" aria-label="Close" (click)="showAlert = false"></button>
+      </div>
+      }
+    </div>
+
+    <a [routerLink]="['/principal']">Ir para outra página</a>
+
+  </div>
+
+    <footer class="footer mt-5">
+
+      <div class="text-center mb-5">
+        <span class="text-muted">Não tem conta?</span>
+        <a href="#" class="text-decoration-none text-muted">Cadastre-se</a>
+      </div>
+    </footer>
+  </div>
+
