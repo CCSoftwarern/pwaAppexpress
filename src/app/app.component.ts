@@ -1,12 +1,61 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { initializeApp } from '@angular/fire/app';
+import { getMessaging, getToken, onMessage } from '@angular/fire/messaging';
+import { environment } from '../environments/environment';
+
+
 
 @Component({
   selector: 'app-root',
+  standalone: true,
   imports: [RouterOutlet],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
-export class AppComponent {
-  title = 'AppTestePWA';
+
+
+export class AppComponent implements OnInit {
+
+
+  title = 'AppExpress Motoboy';
+  token: string = '';
+    private messaging: any;
+
+  ngOnInit(): void {
+      const app = initializeApp(environment.firebase);
+      this.messaging = getMessaging(app);
+      this.requestPermission();
+  
+      onMessage(this.messaging, (payload) => {
+        alert(JSON.stringify(payload));
+        // ...
+      });
+    }
+    requestPermission() {
+      console.log('Requesting permission...');
+      Notification.requestPermission().then((permission) => {
+        if (permission === 'granted') {
+          console.log('Notification permission granted.');
+          getToken(this.messaging, {
+            vapidKey: environment.firebase.vapidKey,
+          })
+            .then((currentToken: string) => {
+              if (currentToken) {
+                this.token = currentToken;
+                console.log(currentToken);
+              } else {
+                console.log(
+                  'No registration token available. Request permission to generate one.'
+                );
+              }
+            })
+            .catch((err: any) => {
+              console.log(err);
+            });
+        }
+      });
+    }
+ 
+ 
 }
