@@ -1,0 +1,96 @@
+.user-card {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 12px;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+}
+
+.user-card:hover {
+  box-shadow: 0px 6px 14px rgba(0, 0, 0, 0.15);
+}
+
+.user-photo {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #3f51b5;
+}
+
+.user-details {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.user-name {
+  font-size: 16px;
+  font-weight: 600;
+  color: #222;
+  margin: 0;
+}
+
+.user-phone {
+  font-size: 14px;
+  color: #555;
+  margin: 2px 0 0 0;
+}
+
+.user-card {
+  display: flex;
+  align-items: center;
+  padding: 12px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 60px; /* espaço para o botão flutuante */
+}
+
+.user-photo {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 12px;
+}
+
+.user-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.user-name {
+  margin: 0;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.user-phone {
+  margin: 2px 0 0;
+  color: #555;
+}
+
+.botao-atualizar {
+  position: fixed;
+  bottom: 60px;
+  right: 20px;
+  z-index: 1000;
+  background-color: #3f51b5;
+  color: white;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+
+  /* Aumentando o tamanho do botão */
+  width: 60px;      /* Largura do botão */
+  height: 60px;     /* Altura do botão */
+  border-radius: 50%; /* Mantém o botão redondo */
+
+  /* Ajustando o ícone dentro do botão */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

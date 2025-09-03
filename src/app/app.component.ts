@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { initializeApp } from '@angular/fire/app';
 import { getMessaging, getToken, onMessage } from '@angular/fire/messaging';
@@ -21,6 +21,8 @@ export class AppComponent implements OnInit {
   title = 'AppExpress Motoboy';
   token: string = '';
     private messaging: any;
+
+  
 
   ngOnInit(): void {
       const app = initializeApp(environment.firebase);

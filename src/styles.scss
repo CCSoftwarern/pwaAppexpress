@@ -3,6 +3,28 @@
 /* Importing Bootstrap SCSS file. */
 // @import 'bootstrap/scss/bootstrap';
 @use 'bootstrap/scss/bootstrap';
+@use '@angular/material' as mat;
+:root {
+  @include mat.icon-overrides((
+    color: rgb(255, 255, 255),
+  ));
+   @include mat.toolbar-overrides((
+    container-background-color: rgba(25, 118, 211),
+    container-text-color: rgb(255, 255, 255),
+  ));
+  @include mat.progress-spinner-overrides((
+    active-indicator-color: rgba(25, 118, 211),
+  ));
+}
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html, body { 
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden; /* Garante que não haja scroll lateral */
+  overscroll-behavior-y: none; /* Desativa o pull-to-refresh do navegador */
+  background-color: #fff;
+ }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif;
+
+}

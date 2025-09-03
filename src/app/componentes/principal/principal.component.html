@@ -1,69 +1,41 @@
-<app-toolbar/>
 
-<!-- <div class="container main-content"> -->
-    <!-- <mat-tab-group [(selectedIndex)]="selectedTabIndex" [disableRipple]="true" >
-  <mat-tab  >
-    <p>Conteúdo da Aba 1</p>
-  </mat-tab>
-  <mat-tab >
-    <p>Conteúdo da Aba 2</p>
-  </mat-tab>
-  <mat-tab >
-    <p>Conteúdo da Aba 3</p>
-  </mat-tab>
-</mat-tab-group> -->
-  <!-- Seu conteúdo vai aqui -->
-<!-- </div> -->
 
-<!-- Navegação inferior fixa -->
 
-<div class="search-container">
-  <mat-form-field appearance="outline" class="search-field" floatLabel="auto">
-    <mat-icon matPrefix>search</mat-icon>
-    <input matInput placeholder="Pesquisar entregas" [(ngModel)]="filtroEntrega" />
-  </mat-form-field>
+
+<div class="tab-container">
+  <mat-tab-group headerPosition="below"  style="height: 100vh;" class="fixed-bottom navbar-light ">
+    
+    <!-- Aba Home -->
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <mat-icon class="example-tab-icon">home</mat-icon>
+      </ng-template>
+       
+      <!-- <app-info-usuario/> -->
+      <app-cards [idMotoboy]="id"/>
+    </mat-tab>
+    
+    <!-- Aba Buscar -->
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <mat-icon class="example-tab-icon">search</mat-icon>
+      </ng-template>
+      <!-- Conteúdo de busca pode ir aqui futuramente -->
+    </mat-tab>
+    
+    <!-- Aba Perfil -->
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <mat-icon class="example-tab-icon">person</mat-icon>
+      </ng-template>
+       <app-toolbar></app-toolbar>
+      <app-dados-pessoais></app-dados-pessoais>
+    </mat-tab>
+  
+  </mat-tab-group>
 </div>
 
-<mat-list role="list" class="scrollable-list" >
-  @for (entrega of entregas; track entrega) {
-
-    <mat-list-item role="listitem">
-      <div class="d-flex justify-content-between">
-        <div>
-          <h6 class="mb-1">#{{ entrega.id }} - 10/05/2025 23:04:47</h6>
-          <p class="mb-1">Endereço: {{ entrega.destinatario}}</p>
-        </div>
-        <button mat-icon-button (click)="abrirModal()">
-          <mat-icon>info</mat-icon>
-        </button>
-      </div>
-    </mat-list-item>
-  }
-</mat-list>
-
-
-
-
-
-
-
-
-<nav class="bottom-nav fixed-bottom navbar-light bg-light border-top">
-  <a mat-button (click)="goToTab(0)" routerLinkActive="active">
-    <mat-icon>home</mat-icon>
-    <span>Home</span>
-  </a>
-  <a mat-button (click)="goToTab(1)" routerLinkActive="active">
-    <mat-icon>search</mat-icon>
-    <span>Buscar</span>
-  </a>
-  <a mat-button (click)="goToTab(2)" routerLinkActive="active">
-    <mat-icon>person</mat-icon>
-    <span>Perfil</span>
-  </a>
-</nav>
-
-<!-- Ícones Bootstrap opcionais, caso ainda queira usá-los -->
+<!-- Ícones Bootstrap (opcionais) -->
 <link
   href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
   rel="stylesheet"

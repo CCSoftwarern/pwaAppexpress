@@ -17,7 +17,7 @@ export const routes: Routes = [
         pathMatch: 'full'
     },
     {
-        path: 'principal',
+        path: 'principal/:id',
         title: 'Principal',
         component: PrincipalComponent
     }

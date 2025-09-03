@@ -1,5 +1,39 @@
-.main-content {
-  padding-bottom: 60px; // altura do nav fixo
+
+.card-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 16px;
+}
+
+.custom-card {
+  width: 100%;
+  position: relative; /* Para posicionar a data dentro do card */
+}
+
+.avatar {
+  background-size: cover;
+  background-position: center;
+  border-radius: 50%;
+}
+
+/* Estilo para data/hora */
+.timestamp {
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  font-size: 12px;
+  color: #666;
+  background: rgba(255, 255, 255, 0.8);
+  padding: 2px 6px;
+  border-radius: 4px;
+  z-index: 1;
+}
+
+.espaco-topo {
+  // padding-bottom: 60px; // altura do nav fixo
+  padding-top: 70px; // altura do toolbar fixo
+  
 }
 
 .bottom-nav {
@@ -20,9 +54,7 @@
     font-size: 12px;
 
     mat-icon {
-      font-size: 48px;
-      fill: #2196f3;
-      size: 48px;
+      font-size: 24px;
     }
 
     &.active {
@@ -95,6 +127,9 @@
 .status-pendente {
   color: #ff9800;
 }
+.status-cancelado {
+  color: #ff0000;
+}
 
 mat-list {
   background-color: #fafafa;
@@ -138,38 +173,78 @@ button[mat-icon-button] {
   border-radius: 3px;
 }
 
-.search-container {
-  padding: 0.5rem 1rem;
-  background-color: #ffffff;
-  position: sticky;
-  top: 0;
-  z-index: 1;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+
+.entrega-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.search-field {
-  width: 100%;
+.entrega-info {
+  display: flex;
+  align-items: center;
+}
+
+.ml-2 {
+  margin-left: 8px;
+}
+
+.entrega-hora {
+  font-size: 0.85em;
+  color: gray;
+}
+
+.selected {
+  border: 2px solid #3f51b5;  // cor primária
+  background-color: #e8eaf6;  // azul claro
+  cursor: pointer;
+}
+
+mat-card {
+  transition: background-color 0.3s ease, border 0.3s ease;
+  cursor: pointer;
+}
+
+.ripple-card {
+  cursor: pointer;
+  user-select: none;
+  transition: transform 0.05s ease;
+}
+
+.ripple-card:active {
+  transform: scale(0.98); // ligeiro "afundamento" no clique
+}
+
+.cabecalho {
+  display: flex;
+  align-items: center;
+  background-color: #f5f5f5;
+  padding: 10px 20px;
+  border-bottom: 1px solid #ddd;
+}
+
+.foto {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 15px;
+}
+
+.nome {
+  font-size: 1.2rem;
+  font-weight: 600;
 }
 
 
 
-:host ::ng-deep {
-            .p-scroller-viewport {
-                flex: none;
-            }
-
-            p-skeleton {
-                width: 100%;
-            }
-        }
-.example-tab-icon {
-  margin-right: 8px;
-  size: 48px;
-  color: #2196f3 !important;
 
 
-.main-content {
-  // padding-bottom: 60px; // altura do nav fixo
-  padding-top: 70px; // altura do toolbar fixo
-}}
+
+
+
+
+
+
+
 

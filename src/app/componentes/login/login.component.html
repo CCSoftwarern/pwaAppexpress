@@ -2,7 +2,7 @@
   <div class="container p-4" style="width: 100%; max-width: 400px; border-radius: 20px;">
     <!-- Logo no topo -->
     <div class="text-center mb-4">
-      <img src="https://logospng.org/download/will-bank/will-bank-4096.png" alt="Logo"
+      <img src="https://i.postimg.cc/pTmfcnNK/Google-Play-Store.png" alt="Logo"
         style="max-width: 150px; height: auto;">
     </div>
 
@@ -39,6 +39,11 @@
       </div>
       }
     </div>
+    <!-- <button (click)="requestPermission()">Gerar Token</button>
+    <h6>{{token}}</h6> -->
+
+    <button (click)="CriarSenha()">Criar senha</button>
+    <h1>{{  senhaCriada }}</h1>
 
     <a [routerLink]="['/principal']">Ir para outra página</a>
 
@@ -50,6 +55,8 @@
         <span class="text-muted">Não tem conta?</span>
         <a href="#" class="text-decoration-none text-muted">Cadastre-se</a>
       </div>
+      
+
     </footer>
   </div>
 

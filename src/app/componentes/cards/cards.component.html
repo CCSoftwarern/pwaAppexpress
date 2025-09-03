@@ -1,0 +1,73 @@
+<!-- 
+<div class="container" style="height: 85vh;">
+  @if (entregas!= null) {
+    @for ( entrega of entregas; track entrega) {
+
+  <mat-card appearance="outlined" class="mt-2">
+    <mat-card-content matRipple [matRippleCentered]="false">
+      <div class="entrega-header-row" (click)="executarAcao()">
+
+        <div class="entrega-info">
+          <mat-icon [class]='getStatusInfo(entrega.status).classe'>{{getStatusInfo(entrega.status).icone}}</mat-icon>
+          <span class="ml-2">#{{ entrega.id }} – {{ getPrimeiroESegundoNome(entrega.nome_cliente) }} 
+          </span>
+        </div>
+        <div class="entrega-hora">
+          {{ entrega.dt_cadastro | date: 'shortTime' }}
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+  }    
+  } @if (hasError){
+    <app-error/>
+  } @if (isLoading){
+    <app-loading/>
+  }
+</div> -->
+<app-toolbar></app-toolbar>
+
+<div class="espaco-topo ">
+<app-info-usuario></app-info-usuario>
+</div>
+<div class="container mt-5" style="height: 100vh;">
+  @if (entregas && entregas.length > 0) {
+    @for (entrega of entregas; track entrega.id) {
+      <mat-card appearance="outlined" class="mt-2">
+        <mat-card-content matRipple [matRippleCentered]="false">
+          <div class="entrega-header-row" (click)="executarAcao()">
+
+            <div class="entrega-info" >
+              <mat-icon [class]="getStatusInfo(entrega.status).classe">
+                {{ getStatusInfo(entrega.status).icone }}
+              </mat-icon>
+              <span class="ml-2">
+                #{{ entrega.id }} – {{ getPrimeiroESegundoNome(entrega.nome_cliente) }}
+              </span>
+            </div>
+
+            <div class="entrega-hora">
+              {{ entrega.dt_cadastro | date: 'shortTime' }}
+            </div>
+
+          </div>
+        </mat-card-content>
+      </mat-card>
+    }
+  }
+   <!-- @else {
+    @if (!isLoading && !hasError) {
+   <p class="text-center text-muted mt-3">Nenhuma entrega encontrada.</p>
+    }
+ 
+  } -->
+
+  @if (hasError) {
+    <app-error />
+  }
+
+  @if (isLoading) {
+    <app-loading />
+  }
+
+</div>
