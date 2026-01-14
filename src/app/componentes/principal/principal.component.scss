@@ -103,10 +103,10 @@ mat-list {
 
 mat-list-item {
   border: 1px solid #e0e0e0;
-  padding: 2rem;
+  // padding: 2rem;
   transition: background-color 0.2s;
   border-radius: 6px;
-  margin-bottom: 0.20rem; /* Espaçamento entre os itens */
+  margin-bottom: 0.30rem; /* Espaçamento entre os itens */
   background-color: white;
 }
 
@@ -143,19 +143,32 @@ button[mat-icon-button] {
   top: 0;
   z-index: 1;
   box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+
 }
 
 .search-field {
   width: 100%;
+
 }
 
-
-
-
-
-
-
-
-
-
+// .recibo {
+//     max-width: 600px;
+//     margin: 0.5px auto;
+//     padding: 0.5px;
+//     border: 1px solid #ddd;
+//     border-radius: 10px;
+//     background: #fff;
+// }
+// .recibo h2 {
+//     text-align: center;
+// }
+.assinatura {
+    margin-top: 50px;
+    text-align: center;
+    border-top: 0.5px solid #000;
+    padding-top: 0.5px;
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+}
 

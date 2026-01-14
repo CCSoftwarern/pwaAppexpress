@@ -5,7 +5,7 @@ import { environment } from '../../../environments/environment';
 import { createClient } from '@supabase/supabase-js';
 import bcrypt from 'bcryptjs';
 import { FormsModule } from '@angular/forms';
-import { Router, RouterModule } from '@angular/router'; 
+import { Router, RouterModule } from '@angular/router';
 
 const supabase = createClient(environment.supabase.supabaseUrl, environment.supabase.supabaseKey);
 
@@ -16,23 +16,28 @@ const supabase = createClient(environment.supabase.supabaseUrl, environment.supa
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })
-export class LoginComponent {
-   token: string = '';
+export class LoginComponent implements OnInit {
+  token: string = '';
   isLoading: boolean = false;
   senhaCriada: string = '';
   email = '';
   password = '';
- visible: boolean = false;
- showAlert = false;
+  visible: boolean = false;
+  showAlert = false;
   alertType = 'success'; // success | danger | warning | info
   alertMessage = 'Operação realizada com sucesso!';
 
-  constructor(private router: Router) {}
+  constructor(private router: Router) { }
 
+  ngOnInit(): void {
+    if (!Storage.prototype.getItem.call(localStorage, 'motoboy')) {
+      this.router.navigate(['/login']);
+    } else {
+      this.router.navigate(['/principal']);
+    }
+  }
 
-  
-
-  async loginMotoboy( ) {
+  async loginMotoboy() {
     // 1. Buscar usuário por email
     this.isLoading = true;
     const { data, error } = await supabase
@@ -58,11 +63,13 @@ export class LoginComponent {
     } else {
       console.log('Senha correta');
       this.isLoading = false;
-      this.router.navigate(['/principal']); 
+      this.router.navigate(['/principal']);
     }
 
     // 3. Retornar dados do motoboy
-      this.router.navigate(['/principal']);
+    this.router.navigate(['/principal']);
+    console.log('Login realizado com sucesso', data);
+    Storage.prototype.setItem.call(localStorage, 'motoboy', JSON.stringify(data));
     return data;
   }
 
@@ -77,7 +84,7 @@ export class LoginComponent {
 
   }
 
-show(type: string, message: string) {
+  show(type: string, message: string) {
     this.alertType = type;
     this.alertMessage = message;
     this.showAlert = true;

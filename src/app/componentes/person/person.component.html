@@ -1,0 +1,46 @@
+<app-toolbar />
+<mat-card class="profile-card">
+  <div class="profile-header">
+    <img
+      mat-card-avatar
+      class="avatar"
+      src="https://i.pravatar.cc/150?img=5"
+      alt="Avatar"
+    />
+
+    <h2 class="name">{{motoboyData.nome}}</h2>
+    <p class="email">{{motoboyData.enail}}</p>
+  </div>
+
+  <mat-divider></mat-divider>
+
+  <mat-list>
+    <mat-list-item>
+      <mat-icon matListItemIcon>phone</mat-icon>
+      <div matListItemTitle>Celular</div>
+      <div matListItemLine>{{motoboyData.celular}}</div>
+    </mat-list-item>
+
+    <mat-list-item>
+      <mat-icon matListItemIcon>location_on</mat-icon>
+      <div matListItemTitle>Endereço</div>
+      <div matListItemLine>Rua das Flores, 123</div>
+    </mat-list-item>
+
+    <mat-list-item>
+      <mat-icon matListItemIcon>badge</mat-icon>
+      <div matListItemTitle>Perfil</div>
+      <div matListItemLine>Cliente</div>
+    </mat-list-item>
+  </mat-list>
+
+  <mat-card-actions>
+    <button mat-button color="primary" class="btn-full">
+      <mat-icon>edit</mat-icon>
+      Editar Perfil
+    </button>
+  </mat-card-actions>
+</mat-card>
+
+
+<app-navbar />

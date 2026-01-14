@@ -7,6 +7,7 @@ import { provideServiceWorker } from '@angular/service-worker';
 import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
 import { provideMessaging, getMessaging } from '@angular/fire/messaging';
 import { environment } from '../environments/environment';
+import { provideAnimations } from '@angular/platform-browser/animations';
 
 
 export const appConfig: ApplicationConfig = {
@@ -19,5 +20,7 @@ export const appConfig: ApplicationConfig = {
     provideServiceWorker('ngsw-worker.js', {
             enabled: !isDevMode(),
             registrationStrategy: 'registerWhenStable:30000'
-          }),]
+          }),
+    provideAnimations() 
+        ]
 };

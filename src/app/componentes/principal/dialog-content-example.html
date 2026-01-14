@@ -1,0 +1,149 @@
+
+<mat-dialog-content class="mat-typography">
+
+            <div >
+                <div class="text-center">
+                    <img src="https://i.postimg.cc/MTtRV0QL/Google-Play-Store.png" style="width: 68px; height: 68px;" alt="">
+                </div>
+                <br>
+                <br>
+  
+                <h3 class="text-primary text-center">Detalhe da entrega</h3>
+
+                <table class="table table-bordered">
+                    <tbody>
+                        <tr>
+                            <td class="table-light">Status:</td>
+                            
+                                 @switch (detalheEntrega.status) {
+                                @case ('F') {
+                                    <td style="color: white; background-color: green;">Finalizado</td>
+                                    
+                                }
+                                @case ('P') {
+                                    <td style="color: black; background-color: orange;">Pendente</td>
+                                }
+                                @case ('C') {
+                                    <td style="color: white; background-color: red;">Cancelado</td>
+                                }
+                                @case ('S') {
+                                    <td style="color: black; background-color: #ADD8E6;">Solicitado</td>
+                                    
+                                }
+                            } 
+                        </tr>
+                        <tr>
+                            <td class="table-light">Pedido:</td>
+                            <td>{{ detalheEntrega.id }}</td>
+                        </tr>
+                        <tr>
+                            <td class="table-light">Data:</td>
+                            <td>{{ detalheEntrega.dt_cadastro |  date:'dd/MM/yyyy HH:mm:ss':'America/Fortaleza' }}</td>
+                        </tr>
+                        <tr>
+                            <td>Cliente:</td>
+                            <td>{{ detalheEntrega.nome_cliente }}</td>
+                        </tr>
+                        <tr>
+                            <td>Endereço do cliente:</td>
+                            <td>{{ detalheEntrega.endereco_cliente || 'Não cadastrado' }}</td>
+                        </tr>
+                        <tr>
+                            <td>Telefone:</td>
+                            <td>{{ detalheEntrega.celular }} <strong> - </strong> </td>
+                        </tr>
+                        <tr>
+                            <td>Valor:</td>
+                            <td>{{ detalheEntrega.vr_calculado | currency:'BRL' }}</td>
+                        </tr>
+                        <tr>
+                            <td>Pagamento:</td>
+                            <td>@switch (detalheEntrega.id_forma_pgto) {
+                                @case (1) {
+                                    Dinheiro
+                                }
+                                @case (2) {
+                                    Pix cooperativa
+                                }
+                                @case (3) {
+                                    Pix motoboy
+                                }
+                                @case (4) {
+                                    Comanda
+                                }
+                            }</td>
+                        </tr>
+                        <tr>
+                            <td>Operador:</td>
+                            <td>{{ detalheEntrega.operador }}</td>
+                        </tr>
+                        <tr>
+                            <td>Atendido por:</td>
+                            <td>{{ detalheEntrega.motoboy_nome }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <table class="table table-bordered">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Informações de coleta</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>{{detalheEntrega.endereco_retirada}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+    
+        
+                <hr>
+
+                <table class="table table-bordered">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Informações de entrega</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>{{detalheEntrega.endereco_entrega}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+    
+        
+                <hr>
+
+                <table class="table table-bordered">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Observações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>{{detalheEntrega.descricao}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+        
+           
+  
+        <!-- @if (item.status == 'P') {
+            <div class="container center text-center">
+                <p-confirmdialog />
+                <p-button label="Finalizar entrega" icon="pi pi-check" size="large" (onClick)="confirm1($event, item.id)" />
+              </div>
+
+        } -->
+    
+                <p class="text-center text-muted mt-3"> </p>
+            </div>
+  
+
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Fechar</button>
+  <button mat-button [mat-dialog-close]="true" cdkFocusInitial [disabled]="detalheEntrega.status == 'C' || detalheEntrega.status == 'F'"  (click)="onFinishEntrega(detalheEntrega.id, '')">Finalizar</button>
+</mat-dialog-actions>
