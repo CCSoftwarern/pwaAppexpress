@@ -6,13 +6,15 @@ import { createClient } from '@supabase/supabase-js';
 import bcrypt from 'bcryptjs';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
+import {MatButtonModule} from '@angular/material/button';
+import {MatInputModule} from '@angular/material/input';
 
 const supabase = createClient(environment.supabase.supabaseUrl, environment.supabase.supabaseKey);
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [FormsModule, RouterModule],
+  imports: [FormsModule, RouterModule, MatButtonModule, MatInputModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })

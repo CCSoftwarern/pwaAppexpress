@@ -2,7 +2,7 @@
   <div class="container p-4" style="width: 100%; max-width: 400px; border-radius: 20px;">
     <!-- Logo no topo -->
     <div class="text-center mb-4">
-      <img src="https://i.postimg.cc/BQJXpjtR/logo.png" alt="Logo"
+      <img src="https://i.postimg.cc/Gt19XHt2/xxhdpi.png" alt="Logo"
         style="max-width: 150px; height: auto;">
     </div>
 
@@ -22,7 +22,7 @@
     </div>
 
     <button (click)="loginMotoboy()" class="btn w-100 rounded-pill mb-2 mt-4"
-      style="background-color: #ff784b; color: white;" [disabled]="isLoading">
+      mat-flat-button [disabled]="isLoading">
       @if(!isLoading) {
       <span>Login</span>
       }@else {
@@ -30,6 +30,7 @@
       <span> Entrando...</span>
       }
     </button>
+
 
     <div class="text-center mb-4 mt-4">
       @if (showAlert) {

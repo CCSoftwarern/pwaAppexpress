@@ -17,6 +17,8 @@ import { CurrencyPipe, DatePipe } from '@angular/common';
 import { MatDialog, MatDialogModule, MatDialogActions, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { trigger, transition, style, animate } from '@angular/animations';
 import { NavbarComponent } from "../navbar/navbar.component";
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { HttpErrorResponse } from '@angular/common/http';
 
 
 
@@ -24,7 +26,7 @@ import { NavbarComponent } from "../navbar/navbar.component";
   selector: 'app-principal',
   standalone: true,
   imports: [MatIconModule,
-    MatButtonModule, MatTabsModule, MatToolbarModule, ToolbarComponent, MatListModule, MatFormFieldModule, MatInputModule, FormsModule, RouterModule, MatProgressSpinnerModule, DatePipe, MatDialogModule, MatIconModule, NavbarComponent],
+    MatButtonModule, MatTabsModule, MatToolbarModule, ToolbarComponent, MatListModule, MatFormFieldModule, MatInputModule, FormsModule, RouterModule, MatProgressSpinnerModule, DatePipe, MatDialogModule, MatIconModule, NavbarComponent, MatProgressBarModule],
   templateUrl: './principal.component.html',
   styleUrl: './principal.component.scss',
   animations: [
@@ -48,7 +50,7 @@ export class PrincipalComponent implements OnInit, OnDestroy {
   filtroEntrega: string = '';
   isloading: boolean = false;
   entregas: Entrega[] = [];
-  errorMessage: string = '';
+  errorMessage?: string = '';
   query: string = '';
   onlyActive: boolean = false;
   lastUpdated: Date = new Date();
@@ -65,7 +67,7 @@ export class PrincipalComponent implements OnInit, OnDestroy {
       this.onGetEntregas(motoboy.id);
       this.intervalo = setInterval(() => {
         this.onGetEntregas(motoboy.id);
-        this.lastUpdated = new Date();
+        // this.lastUpdated = new Date();
       }, 15000);
     } else {
       this.router.navigate(['/login']);
@@ -73,7 +75,7 @@ export class PrincipalComponent implements OnInit, OnDestroy {
   }
 
   // Coloquei no componente navBar
-  
+
   // goToTab(index: number) {
   //   this.selectedTabIndex = index;
   //   switch (index) {
@@ -92,20 +94,103 @@ export class PrincipalComponent implements OnInit, OnDestroy {
 
   // }
 
-  onGetEntregas(motoboyID: number) {
-    this.isloading = true;
+  // onGetEntregas(motoboyID: number) {
+  //   this.isloading = true;
 
-    this.apiService.getEntregas(motoboyID).subscribe({
-      next: (result: Entrega[]) => {
-        this.entregas = result;
-        this.isloading = false;
-      },
-      error: (error) => {
-        this.errorMessage = 'Erro ao carregar os dados: ' + error.message;
-        this.isloading = false;
-      },
-    });
-  }
+  //   this.apiService.getEntregas(motoboyID).subscribe({
+  //     next: (result: Entrega[]) => {
+  //       this.entregas = result;
+  //       this.isloading = false;
+  //      Storage.prototype.setItem.call(localStorage, 'entregas', JSON.stringify(this.entregas)); 
+  //     },
+  //     error: (error) => {
+  //       this.errorMessage = 'Erro ao carregar os dados: ' + error.message;
+  //       this.entregas = Storage.prototype.setItem.call(localStorage, 'entregas', JSON.stringify(this.entregas)); 
+  //       this.isloading = false;
+  //     },
+  //   });
+  // }
+
+  // onGetEntregas(motoboyID: number) {
+  //   this.isloading = true;
+
+  //   this.apiService.getEntregas(motoboyID).subscribe({
+  //     next: (result: Entrega[]) => {
+  //       this.entregas = result;
+  //       this.isloading = false;
+
+  //       // salva no storage
+  //       localStorage.setItem('entregas', JSON.stringify(this.entregas));
+  //       localStorage.setItem('lastupdate', this.lastUpdated.toISOString());
+  //       this.lastUpdated = new Date();
+  //     },
+
+  //     error: (error) => {
+  //       this.errorMessage = 'Erro ao carregar os dados. Carregando dados locais.';
+
+  //       // tenta recuperar do storage
+  //       const entregasStorage = localStorage.getItem('entregas');
+  //       const lastupdateStorage = localStorage.getItem('lastupdate');
+
+  //       if (entregasStorage) {
+  //         this.entregas = JSON.parse(entregasStorage);
+
+  //         if (lastupdateStorage) {
+  //           this.lastUpdated = new Date(lastupdateStorage);
+  //         }
+  //       } else {
+  //         this.entregas = [];
+  //       }
+
+  //       this.isloading = false;
+  //     },
+  //   });
+  // }
+
+  onGetEntregas(motoboyID: number) {
+  this.isloading = true;
+
+  this.apiService.getEntregas(motoboyID).subscribe({
+    next: (result: Entrega[]) => {
+      this.entregas = result;
+      this.errorMessage = '';
+      localStorage.setItem('entregas', JSON.stringify(this.entregas));
+
+      this.lastUpdated = new Date();
+      localStorage.setItem('lastupdate', this.lastUpdated.toISOString());
+
+      this.isloading = false;
+    },
+
+    error: (error: HttpErrorResponse) => {
+      if (error.status === 0) {
+        // 🔌 Sem internet
+        this.errorMessage = 'Sem conexão com a internet.';
+      } else {
+        // ❌ Erro do backend
+        this.errorMessage = `Sem conexão com a internet.`;
+      }
+
+      // tenta recuperar do storage
+      const entregasStorage = localStorage.getItem('entregas');
+      const lastupdateStorage = localStorage.getItem('lastupdate');
+
+      if (entregasStorage) {
+        this.entregas = JSON.parse(entregasStorage);
+
+        if (lastupdateStorage) {
+          this.lastUpdated = new Date(lastupdateStorage);
+        }
+      } else {
+        this.entregas = [];
+      }
+
+      this.isloading = false;
+    },
+  });
+}
+
+
   aplicaFiltro(entrega: any): boolean {
     const termo = this.filtroEntrega?.toLowerCase() || '';
     return (

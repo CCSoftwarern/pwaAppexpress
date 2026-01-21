@@ -30,6 +30,7 @@ export class AppComponent implements OnInit {
 
     onMessage(this.messaging, (payload) => {
       alert(JSON.stringify(payload));
+      
       // ...
     });
   }

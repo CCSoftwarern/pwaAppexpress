@@ -1,6 +1,6 @@
 {
-  "name": "AppTestePWA",
-  "short_name": "AppTestePWA",
+  "name": "Expresso Moto APP",
+  "short_name": "ExpressoMoto",
   "theme_color": "#fafafa",
   "background_color": "#fafafa",
   "display": "standalone",
